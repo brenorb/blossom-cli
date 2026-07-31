@@ -30,7 +30,7 @@ jobs:
           - os: ubuntu-latest
             platform: linux-x86_64
             executable: blossom-cli
-          - os: macos-13
+          - os: macos-15-intel
             platform: macos-x86_64
             executable: blossom-cli
           - os: macos-14
