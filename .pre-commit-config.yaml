@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: check-upstream-version
+        name: Check upstream blossom-cli version
+        entry: python scripts/check_upstream_version.py --offline
+        language: system
+        pass_filenames: false
+        always_run: true

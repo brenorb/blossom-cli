@@ -9,7 +9,29 @@ import pytest
 
 
 ROOT = Path(__file__).parents[1]
-RUST_BINARY = os.environ.get("BLOSSOM_RUST_CLI_BIN") or shutil.which("blossom-cli")
+
+
+def _find_rust_binary() -> str | None:
+    configured = os.environ.get("BLOSSOM_RUST_CLI_BIN")
+    if configured:
+        return configured
+
+    candidate = shutil.which("blossom-cli")
+    if candidate is None:
+        return None
+
+    path = Path(candidate)
+    try:
+        launcher = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        return candidate
+
+    if "blossom_cli" in launcher:
+        return None
+    return candidate
+
+
+RUST_BINARY = _find_rust_binary()
 
 
 @pytest.mark.e2e
