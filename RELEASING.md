@@ -18,9 +18,9 @@ The PyPI project name is `blossom-cli`. The published console script has the sam
 After the pending publisher is configured:
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
-gh release create v0.1.0 --repo brenorb/blossom-cli --generate-notes
+git tag v0.5.6
+git push origin v0.5.6
+gh release create v0.5.6 --repo brenorb/blossom-cli --generate-notes
 ```
 
 The GitHub release triggers `.github/workflows/publish.yml`, which builds the package and publishes it through OIDC. A new release is required for each package version.

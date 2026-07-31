@@ -3,7 +3,7 @@ revision = 3
 requires-python = ">=3.10"
 
 [options]
-exclude-newer = "2026-07-24T09:56:42.350523Z"
+exclude-newer = "2026-07-24T10:29:13.659605Z"
 exclude-newer-span = "P7D"
 
 [options.exclude-newer-package]
@@ -11,7 +11,7 @@ docs2epub = false
 
 [[package]]
 name = "blossom-cli"
-version = "0.1.0"
+version = "0.5.6"
 source = { editable = "." }
 
 [package.dev-dependencies]
