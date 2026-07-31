@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "blossom-cli"
+version = "0.1.0"
+description = "A thin uvx wrapper for the Rust blossom-cli client"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Blossom CLI Wrapper Contributors" },
+]
+keywords = ["blossom", "nostr", "blob-storage", "cli", "uvx"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Utilities",
+]
+dependencies = []
+
+[dependency-groups]
+dev = [
+  "pytest>=8",
+]
+
+[project.urls]
+Homepage = "https://github.com/brenorb/blossom-cli"
+Repository = "https://github.com/brenorb/blossom-cli"
+Upstream = "https://github.com/MonumentalSystems/blossom-rs"
+Issues = "https://github.com/brenorb/blossom-cli/issues"
+
+[project.scripts]
+blossom-cli = "blossom_cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/blossom_cli"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"NOTICE.md" = "NOTICE.md"
+"licenses/blossom-rs-MIT.txt" = "licenses/blossom-rs-MIT.txt"
