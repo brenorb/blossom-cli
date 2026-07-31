@@ -57,6 +57,11 @@ def main() -> int:
         action="store_true",
         help="only compare the two local version declarations",
     )
+    parser.add_argument(
+        "--print-local-version",
+        action="store_true",
+        help="print the locally pinned Rust version after checking local consistency",
+    )
     args = parser.parse_args()
 
     try:
@@ -68,6 +73,10 @@ def main() -> int:
                 file=sys.stderr,
             )
             return 1
+
+        if args.print_local_version:
+            print(rust_version)
+            return 0
 
         if args.offline:
             print(f"Local wrapper versions agree: {package_version}")

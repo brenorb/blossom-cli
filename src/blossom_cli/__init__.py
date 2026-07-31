@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import platform
 import shutil
 import subprocess
 import sys
@@ -60,6 +61,36 @@ def path_binary() -> Path | None:
     return path
 
 
+def bundled_platform() -> str | None:
+    """Return the package directory name for the current platform."""
+    system = platform.system().lower()
+    machine = platform.machine().lower()
+    machine = {
+        "amd64": "x86_64",
+        "x64": "x86_64",
+        "aarch64": "arm64",
+    }.get(machine, machine)
+
+    if system == "darwin":
+        system = "macos"
+    elif system not in {"linux", "windows"}:
+        return None
+    return f"{system}-{machine}"
+
+
+def bundled_binary() -> Path | None:
+    """Resolve the executable shipped inside a platform-specific wheel."""
+    platform_name = bundled_platform()
+    if platform_name is None:
+        return None
+
+    executable = "blossom-cli.exe" if os.name == "nt" else "blossom-cli"
+    path = Path(__file__).resolve().parent / "bin" / platform_name / executable
+    if path.is_file() and os.access(path, os.X_OK):
+        return path
+    return None
+
+
 def install_binary() -> Path:
     """Install the pinned upstream crate into the user cache via Cargo."""
     if os.environ.get("BLOSSOM_CLI_NO_INSTALL"):
@@ -106,6 +137,10 @@ def resolve_binary() -> Path:
     explicit = configured_binary()
     if explicit:
         return explicit
+
+    bundled = bundled_binary()
+    if bundled:
+        return bundled
 
     on_path = path_binary()
     if on_path:

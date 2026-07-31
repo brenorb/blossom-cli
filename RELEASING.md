@@ -23,4 +23,11 @@ git push origin v0.5.6
 gh release create v0.5.6 --repo brenorb/blossom-cli --generate-notes
 ```
 
-The GitHub release triggers `.github/workflows/publish.yml`, which builds the package and publishes it through OIDC. A new release is required for each package version.
+The GitHub release triggers `.github/workflows/publish.yml`, which builds the
+source distribution and platform wheels containing the upstream Rust binary,
+then publishes them through OIDC. A new release is required for each package
+version.
+
+The same workflow supports `workflow_dispatch`. Use it from `main` when an
+existing PyPI version needs additional platform wheels; `skip-existing` keeps
+already uploaded files untouched.

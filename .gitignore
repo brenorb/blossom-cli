@@ -5,4 +5,5 @@ __pycache__/
 dist/
 build/
 *.egg-info/
+src/blossom_cli/bin/
 .DS_Store

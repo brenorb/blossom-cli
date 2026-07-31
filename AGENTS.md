@@ -8,8 +8,12 @@ The upstream project is [`MonumentalSystems/blossom-rs`](https://github.com/Monu
 The wrapper must use the latest stable `blossom-cli` version published on
 crates.io. The GitHub repository can contain unreleased work, so do not pin the
 wrapper to a version that is only present on the upstream `main` branch. The
-runtime installs the published crate with `cargo install`, which makes crates.io
-the distribution source of truth.
+build pipeline installs the published crate with `cargo install`, which makes
+crates.io the distribution source of truth.
+
+Published platform wheels contain the compiled upstream executable. Supported
+platforms are Linux x86_64, macOS x86_64, macOS arm64, and Windows x86_64. The
+source distribution remains a fallback for unsupported platforms.
 
 These values must always match the published upstream crate version:
 
@@ -57,3 +61,7 @@ When a new upstream version is published:
 
 The version CI and pre-commit hook are intentionally part of this repository's
 release guardrails. Keep them working when changing the packaging layout.
+
+The publish workflow builds the upstream binary separately on each supported
+runner, places it under `src/blossom_cli/bin/<platform>/`, and uploads the
+platform-specific wheels to PyPI. Do not commit compiled binaries to Git.
