@@ -66,10 +66,14 @@ def main() -> int:
 
     try:
         package_version, rust_version = read_local_versions()
-        if package_version != rust_version:
+        package_matches_rust = package_version == rust_version or package_version.startswith(
+            f"{rust_version}.post"
+        )
+        if not package_matches_rust:
             print(
                 "Version mismatch: pyproject.toml has "
-                f"{package_version}, but RUST_VERSION has {rust_version}.",
+                f"{package_version}, but RUST_VERSION has {rust_version}; "
+                "only a PEP 440 post-release suffix is allowed.",
                 file=sys.stderr,
             )
             return 1
@@ -79,14 +83,17 @@ def main() -> int:
             return 0
 
         if args.offline:
-            print(f"Local wrapper versions agree: {package_version}")
+            print(
+                "Local wrapper release and Rust pin agree: "
+                f"{package_version} ({rust_version})"
+            )
             return 0
 
         upstream_version, repository = read_upstream_version()
-        if package_version != upstream_version:
+        if rust_version != upstream_version:
             print(
-                "Upstream version mismatch: wrapper has "
-                f"{package_version}, but {repository} publishes "
+                "Upstream version mismatch: Rust pin is "
+                f"{rust_version}, but {repository} publishes "
                 f"blossom-cli {upstream_version} on crates.io.",
                 file=sys.stderr,
             )
@@ -95,7 +102,10 @@ def main() -> int:
         print(f"Version check failed: {exc}", file=sys.stderr)
         return 1
 
-    print(f"Wrapper and upstream blossom-cli agree on version {package_version}")
+    print(
+        "Wrapper release and upstream blossom-cli agree on Rust version "
+        f"{rust_version} (package {package_version})"
+    )
     return 0
 
 

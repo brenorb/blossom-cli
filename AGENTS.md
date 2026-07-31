@@ -15,9 +15,12 @@ Published platform wheels contain the compiled upstream executable. Supported
 platforms are Linux x86_64, macOS x86_64, macOS arm64, and Windows x86_64. The
 source distribution remains a fallback for unsupported platforms.
 
-These values must always match the published upstream crate version:
+These values must always identify the published upstream crate version. The
+package version may add a PEP 440 `.postN` suffix for wrapper-only repairs,
+while `RUST_VERSION` must remain the exact upstream crate version:
 
-- `project.version` in `pyproject.toml`;
+- `project.version` in `pyproject.toml` (equal to `RUST_VERSION` or a
+  `.postN` repair release);
 - `RUST_VERSION` in `src/blossom_cli/__init__.py`;
 - the Git tag and GitHub release used to publish the wrapper to PyPI.
 
@@ -57,7 +60,7 @@ When a new upstream version is published:
 4. Update release documentation or examples that contain the version.
 5. Run all required checks.
 6. Create the wrapper tag and GitHub release with the same version as the Rust
-   crate.
+   crate, unless a `.postN` wrapper-only repair release is required.
 
 The version CI and pre-commit hook are intentionally part of this repository's
 release guardrails. Keep them working when changing the packaging layout.

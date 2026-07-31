@@ -31,3 +31,7 @@ version.
 The same workflow supports `workflow_dispatch`. Use it from `main` when an
 existing PyPI version needs additional platform wheels; `skip-existing` keeps
 already uploaded files untouched.
+
+If a published wheel needs a packaging repair, use the next PEP 440 post
+release (for example, `0.5.6.post1`) while keeping `RUST_VERSION` pinned to
+the upstream crate version. PyPI does not allow replacing an uploaded file.

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "blossom-cli"
-version = "0.5.6"
+version = "0.5.6.post1"
 description = "A uvx launcher with bundled Rust blossom-cli binaries"
 readme = "README.md"
 requires-python = ">=3.10"
