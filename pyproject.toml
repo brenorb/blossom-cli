@@ -35,6 +35,9 @@ Issues = "https://github.com/brenorb/blossom-cli/issues"
 [project.scripts]
 blossom-cli = "blossom_cli:main"
 
+[tool.hatch.build]
+artifacts = ["src/blossom_cli/bin/**/*"]
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/blossom_cli"]
 

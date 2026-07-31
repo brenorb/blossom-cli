@@ -61,6 +61,12 @@ jobs:
           chmod +x "src/blossom_cli/bin/${{ matrix.platform }}/${{ matrix.executable }}"
         shell: bash
       - run: uv build --wheel
+      - name: Verify bundled executable
+        env:
+          EXPECTED_PATH: blossom_cli/bin/${{ matrix.platform }}/${{ matrix.executable }}
+        run: |
+          uv run python -c 'from pathlib import Path; from zipfile import ZipFile; wheel = next(Path("dist").glob("*.whl")); names = ZipFile(wheel).namelist(); expected = __import__("os").environ["EXPECTED_PATH"]; assert expected in names, f"{expected} is missing from {wheel}"'
+        shell: bash
       - uses: actions/upload-artifact@v4
         with:
           name: dist-${{ matrix.platform }}
