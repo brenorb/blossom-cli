@@ -13,7 +13,7 @@ The wrapper preserves the upstream command-line API. It does not add, rename, or
 1. `BLOSSOM_RUST_CLI_BIN`, when explicitly configured.
 2. A `blossom-cli` executable already available on `PATH`.
 3. A versioned executable in the user cache.
-4. `cargo install blossom-cli --version 0.5.8 --locked` into the user cache.
+4. `cargo install blossom-cli --version 0.5.6 --locked` into the user cache.
 
 This package does not contain or reimplement the Blossom protocol. The Rust executable and protocol implementation come from [`MonumentalSystems/blossom-rs`](https://github.com/MonumentalSystems/blossom-rs), which is published under the MIT License. This project exists only to provide a convenient `uvx` entry point for that upstream project.
 
