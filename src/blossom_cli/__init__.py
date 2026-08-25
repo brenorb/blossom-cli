@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 RUST_PACKAGE = "blossom-cli"
-RUST_VERSION = "0.5.6"
+RUST_VERSION = "0.6.0"
 UPSTREAM_REPOSITORY = "https://github.com/MonumentalSystems/blossom-rs"
 
 

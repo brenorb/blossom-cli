@@ -18,9 +18,9 @@ The PyPI project name is `blossom-cli`. The published console script has the sam
 After the pending publisher is configured:
 
 ```bash
-git tag v0.5.6
-git push origin v0.5.6
-gh release create v0.5.6 --repo brenorb/blossom-cli --generate-notes
+git tag v0.6.0
+git push origin v0.6.0
+gh release create v0.6.0 --repo brenorb/blossom-cli --generate-notes
 ```
 
 The GitHub release triggers `.github/workflows/publish.yml`, which builds the
@@ -33,5 +33,5 @@ existing PyPI version needs additional platform wheels; `skip-existing` keeps
 already uploaded files untouched.
 
 If a published wheel needs a packaging repair, use the next PEP 440 post
-release (for example, `0.5.6.post2`) while keeping `RUST_VERSION` pinned to
+release (for example, `0.6.0.post1`) while keeping `RUST_VERSION` pinned to
 the upstream crate version. PyPI does not allow replacing an uploaded file.

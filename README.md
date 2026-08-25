@@ -14,7 +14,7 @@ The wrapper preserves the upstream command-line API. It does not add, rename, or
 2. The executable bundled in the platform wheel.
 3. A `blossom-cli` executable already available on `PATH`.
 4. A versioned executable in the user cache.
-5. `cargo install blossom-cli --version 0.5.6 --locked` into the user cache as a fallback for source distributions and unsupported platforms.
+5. `cargo install blossom-cli --version 0.6.0 --locked` into the user cache as a fallback for source distributions and unsupported platforms.
 
 The published wheels currently target Linux x86_64, macOS x86_64, macOS arm64, and Windows x86_64. On those platforms, a normal invocation is enough:
 
