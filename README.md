@@ -37,6 +37,14 @@ uvx blossom-cli --server "$BLOSSOM_SERVER" --format json --no-publish upload ./f
 
 Use `uvx blossom-cli --help` for the complete command surface. Read the upstream documentation for Blossom protocol behavior and server compatibility.
 
+## Multi-server replication tracking
+
+[Blob presence and replication semantics](docs/replication-semantics.md) records
+the proposed per-target presence states, fallback/retry policy and result/test
+contract for issue #1. It distinguishes the published Rust behavior from the SDK
+reference. These are future upstream requirements; the transparent wrapper does
+not add protocol or replication commands.
+
 ## Development
 
 ```bash
